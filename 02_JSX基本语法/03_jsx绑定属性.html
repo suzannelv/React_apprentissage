@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/babel.js"></script>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react_dom.js"></script>
+
+  <script type="text/babel">
+ 
+// 1.定义根组件
+  class App extends React.Component{
+    // 组件数据
+    constructor(){
+      super()
+      this.state = {
+        title:"hello world",
+        imgUrl:"https://img.freepik.com/photos-gratuite/vue-verticale-du-celebre-rocher-plage-santa-giulia_268835-3733.jpg?w=360&t=st=1684010055~exp=1684010655~hmac=1d4fba7976b30efe4fd5fb832d6bed77c1e46eb23b45e857f877f1e691c16438",
+        href:"https://wwww.baidu.com",
+
+        isActive: true,
+        objStyle:{color:"red", fontSize:"30px"}
+      }
+    }
+
+    // 渲染内容 render方法
+    render(){
+      const {title, imgUrl, href, isActive, objStyle} = this.state
+
+      // 需求:isActive:true -> active
+      // class绑定写法一: 字符串拼接
+      const className = `abc cba ${isActive? 'active':' '}`
+      // class绑定写法二：将所有的class放到数组中
+      const classList = ["aaa", "lll", "iii"]
+      if(isActive) classList.push("active")
+
+      // class绑定写法三：第三方库classnames -> npm install classnames
+
+
+
+
+      return (  
+        <div>
+          {/*1. 绑定全局title属性*/}
+          <h2 title={title}>title属性</h2>
+          <img src={imgUrl} alt=""/>
+          <a href={href}>baidu</a>
+
+          {/*2.绑定class属性: 最好使用className,因为class在js中是关键字，避免混淆 */}
+          <h2 className={className}>lollol</h2>
+          <h2 className={classList.join(" ")}>lollol</h2>
+
+          {/*3. 绑定style属性：绑定对象类型*/}
+          <h2 style={{color:"red", fontSize:"30px"}}>style</h2>
+          <h2 style={objStyle}>style</h2>
+
+
+        </div>
+      )
+    }
+  }
+
+
+// 2.渲染根组件
+const root = ReactDOM.createRoot(document.querySelector("#root"))
+root.render(<App/>)
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+  <!-- <div id="app"></div> -->
+
+<script src ="https://unpkg.com/react@18/umd/react.development.js" crossorigin ></script>
+<script src ="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin ></script>
+<script src ="https://unpkg.com/babel-standalone@6/babel.min.js "></script>
+
+<script type="text/babel">
+  const root = ReactDOM.createRoot(document.querySelector("#root"))
+     // 1.定义变量
+     let message = "Hello World"
+
+    // 2.监听按钮的点击
+    function btnClick(){
+      message="hello React"
+
+      // 渲染内容de nouveau
+      rootRender()
+    }
+
+  // 封装一个渲染函数
+    rootRender()
+    function rootRender(){
+      // render 第一个括号是方法，里面的小括号是代表整体代码
+      root.render((
+        <div>
+          <h2>{message}</h2>
+          <button onClick={btnClick}>changer</button>
+        </div>  
+      ))
+    }
+
+  // const app = ReactDOM.createRoot(document.querySelector("#app") )
+  // app.render(<h2>hello react</h2>)
+
+
+</script> 
+</body>
+</html>

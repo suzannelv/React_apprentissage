@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/babel.js"></script>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react_dom.js"></script>
+
+  <script type="text/babel">
+ 
+// 使用组件进行代码重构
+// 类组件和函数式组件
+  class App extends React.Component{
+    // 组件数据
+    constructor(){
+      super()
+      this.state = {
+        message:"hello world"
+      }
+    }
+
+    // 组件方法(实例方法)
+    btnClick(){
+      // console.log('btn', this)
+      // setState内部做了两件事情：1 将state中message值修改掉 2 自动重新执行render函数
+      this.setState({
+        message:"hello react"
+      })
+    }
+
+
+    // 渲染内容 render方法
+    render(){
+      return (  
+        <div>
+          <h2>{this.state.message}</h2>
+          <button onClick={this.btnClick.bind(this)}>changer</button>
+        </div>
+      )
+  
+    }
+
+  }
+
+const root = ReactDOM.createRoot(document.querySelector("#root"))
+root.render(<App/>)
+
+  </script>
+</body>
+</html>

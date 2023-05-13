@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/babel.js"></script>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react_dom.js"></script>
+
+  <script type="text/babel">
+ 
+// 1.定义根组件
+  class App extends React.Component{
+    // 组件数据
+    constructor(){
+      super()
+      this.state = {
+        message:"hello world",
+        names:["aaa", "bbb", "ccc"],
+
+        aaa:undefined,
+        bbb: null,
+        ccc: true,
+        friend:{name:"kobe"},
+
+        firstName: "kobe",
+        lastName:"bryant",
+
+        age:20,
+        movies: ["星际穿越", "大话西游", "盗梦空间", "少年派的奇幻漂流"]
+      }
+    }
+
+    // 渲染内容 render方法
+    render(){
+      // 1.插入标识符
+      const {message, names, aaa, bbb, ccc} = this.state
+      const {friend, firstName, lastName} = this.state
+      // 2.对内容运算显示插入表达式
+      const fullName = firstName + " " + lastName
+      const {age} = this.state
+      const ageText = age>=18?"adult":"enfant"
+      const liEls  = this.state.movies.map(movie=><li>{movie}</li>)
+
+      // 书写规范
+      // 1 JSX的结构中只能有一个根元素
+      // 2 jsx结构中通常会包裹一个括号，将这个jsx当成一个整体，实现换行
+      // 3 jsx可以是单标签，但是单标签必须以结尾/> 
+
+      // 3.返回jsx内容
+      return (  
+        <div>
+          {/*jxs html 注释*/}
+          {/*1. 可以插入Number/String/Array类型，会直接显示出来*/}
+          <h2>{message}</h2>
+          <h2>{names}</h2>
+
+          {/*2. undefined/ null/boolean 什么都不会显示，如果显示，可以转换成string，布尔类型可以使用方法toString() */}
+          <h2>{aaa + ""}</h2>
+          <h2>{String(bbb)}</h2>
+          <h2>{ccc.toString()}</h2>
+
+          {/*3. object类型不能做子元素进行此显示*/}
+          <h2>{friend.name}</h2>
+          <h2>{Object.keys(friend)[0]}</h2>
+
+          {/*4. 可以插入对应的表达式*/}
+          <h2>{10+30}</h2>
+          <h2>{firstName+" "+lastName}</h2>
+          <h2>{fullName}</h2>
+
+          {/*5. 可以插入三元运算符*/}
+          <h2>{ageText}</h2>
+          <h2>{age>=18?"adult":"child"}</h2>
+
+          {/*6. 可以调用方法获取结果*/}
+          <ul>{liEls}</ul>
+          <ul>{this.getMovieEls()}</ul>
+
+
+        </div>
+      )
+    }
+
+    getMovieEls() {
+      const liEls  = this.state.movies.map(movie=><li>{movie}</li>)
+      return liEls
+    }
+  }
+
+
+// 2.渲染根组件
+const root = ReactDOM.createRoot(document.querySelector("#root"))
+root.render(<App/>)
+
+  </script>
+</body>
+</html>
