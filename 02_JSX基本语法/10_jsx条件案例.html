@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/babel.js"></script>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react_dom.js"></script>
+
+  <script type="text/babel">
+ 
+// 1.定义根组件
+  class App extends React.Component{
+    // 组件数据
+    constructor(){
+      super()
+      this.state = {
+        message:"hello world",
+        isShow: true
+      }
+    }
+
+
+    changeShow(){
+      this.setState({isShow:!this.state.isShow})
+    }
+
+    // 渲染内容 render方法
+    render(){
+      const {message, isShow} = this.state
+
+      // let showEl = null
+      // if(isShow){
+      //   showEl=<h2>{message}</h2>
+      // }
+
+      return (  
+        <div>
+          <button onClick={()=>this.changeShow()}>toggle</button>
+          {/*<h2>{showEl}</h2>*/}
+
+          {/*简洁写法*/}
+          {isShow && <h2>{message}</h2>}
+
+
+          {/* v-show 效果*/}
+
+          <h2 style={{display:isShow?'block':'none'}}>hahah</h2>
+
+
+        </div>
+      )
+    }
+  }
+
+
+// 2.渲染根组件
+const root = ReactDOM.createRoot(document.querySelector("#root"))
+root.render(<App/>)
+
+  </script>
+</body>
+</html>

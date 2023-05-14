@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/babel.js"></script>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react_dom.js"></script>
+
+  <script type="text/babel">
+ 
+// 1.定义根组件
+  class App extends React.Component{
+    // 组件数据
+    constructor(){
+      super()
+      this.state = {
+        isReady:true,
+        friend :{
+          name:"coder",
+          desc:"soleil"
+        }
+      }
+    }
+
+    // 渲染内容 render方法
+    render(){
+      const {isReady, friend} = this.state
+   // 1.条件判断方式一：使用if进行条件判断
+      let showEl = null
+      if(isReady){
+        showEl = <h2>c'est partie!</h2>
+      }else{
+        showEl = <h2>pas encore</h2>
+      }
+
+      return (  
+        <div>
+          {/*1. 方式一：根据条件给变量赋值不同的内容*/}
+
+          {showEl}
+
+          {/*2. 方式二：三元运算符 */}
+
+          <div>{isReady?<button>ready</button>:<button>non</button>}</div>
+
+          {/*3. 方式三：逻辑&&运算符*/}
+          {/*应用场景：当某一个值有可能为undefin时，使用逻辑与进行条件判断*/}
+
+          <div>{friend && <div>{friend.name + " " + friend.desc}</div>}</div>
+        </div>
+      )
+    }
+  }
+
+
+// 2.渲染根组件
+const root = ReactDOM.createRoot(document.querySelector("#root"))
+root.render(<App/>)
+
+  </script>
+</body>
+</html>

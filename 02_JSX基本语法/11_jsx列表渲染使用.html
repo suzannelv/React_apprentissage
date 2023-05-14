@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .item{
+      border: 1px solid orange;
+      margin:10px auto;
+    }
+
+  </style>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script src="../lib/babel.js"></script>
+  <script src="../lib/react.js"></script>
+  <script src="../lib/react_dom.js"></script>
+
+  <script type="text/babel">
+ 
+// 1.定义根组件
+  class App extends React.Component{
+    // 组件数据
+    constructor(){
+      super()
+      this.state = {
+        students:[
+          {id: 111, name:"why", score:139},
+          {id: 112, name:"kobe", score:189},
+          {id: 113, name:"james", score:159},
+          {id: 114, name:"curry", score:98},
+
+        ]
+      }
+    }
+
+    // 渲染内容 render方法
+    render(){
+      const {students} = this.state
+      // 分数大于100分数进行展示
+      // const filterStudents = students.filter(item=>{
+      //   return item.score > 100
+      // })
+
+      // 分数大于100但只展示两个人的信息
+      // const sliceStudent = filterStudents.slice(0, 2)
+
+      return (  
+        <div>
+          <h2>liste des étudiants</h2>
+          <div className="list">
+            {
+             students.filter(item=>item.score>100).slice(0, 2).map(item=>{
+                return (
+                  <div class="item" key={item.id}>
+                    <h2>no. {item.id}</h2>
+                    <h2>name: {item.name}</h2>
+                    <h2>score: {item.score}</h2>
+
+                  </div>
+                )
+              })
+            }
+          </div>
+        </div>
+      )
+    }
+  }
+
+
+// 2.渲染根组件
+const root = ReactDOM.createRoot(document.querySelector("#root"))
+root.render(<App/>)
+
+  </script>
+</body>
+</html>
